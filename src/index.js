@@ -12,6 +12,9 @@ const InfoDiv = document.querySelector('.country-info');
 const DEBOUNCE_DELAY = 300;
 search.addEventListener('input', debounce (onSearch, DEBOUNCE_DELAY));
 
+list.style.listStile = `none`;
+list.style.paddingLeft = `0`;
+
 function onSearch(evt){
     if (!evt.target.value.trim()){
         list.innerHTML = '';
@@ -58,7 +61,9 @@ function createList(arr){
     .map(
         ({name: {official}, flags:{svg, alt},
         }) =>
-        `<li><p><img src="${svg}" alt="${alt}" width="30px" height="20px">${official}</p></li>`
+        `<li><p>
+        <img src="${svg}" alt="${alt}" style="margin-right: 10px;" width="40px" height="30px">${official}
+        </p></li>`
     ) .join('');
 };
 
@@ -67,10 +72,9 @@ function createContainer(arr){
     .map(
         ({name: {official}, capital, population, flags:{svg, alt}, languages,
         }) =>
-        `<img src="${svg}" alt="${alt}"width="50px" height="40px">
-        <h2> <span class="text">Name:</span> ${official}</h2>
-        <p> <span class="text">Population:</span> ${population} people</p>
+        `<h2> <img src="${svg}" alt="${alt}"width="50px" height="40px"> <span class="text"></span> ${official}</h2>
         <p> <span class="text">Capital:</span> ${capital}</p>
+        <p> <span class="text">Population:</span> ${population} people</p>
         <p> <span class="text">Languages:</span> ${Object.values(languages).join('')}</p>`
 
     ) .join('');
